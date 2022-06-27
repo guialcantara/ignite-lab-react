@@ -8,12 +8,18 @@ import {
 
 import '@vime/core/themes/default.css';
 import { useGetLessonBySlugQuery } from '../graphql/generated';
+import { useEffect } from 'react';
+import { useDraggableVideo } from '../hooks/UseDraggableVideo';
 
 interface VideoProps {
   lessonSlug: string;
 }
 
 export function Video(props: VideoProps) {
+  const { setSlugInLocalStorage } = useDraggableVideo()
+  useEffect(() => {
+    setSlugInLocalStorage(props.lessonSlug)
+  }, [props.lessonSlug]);
   const { data } = useGetLessonBySlugQuery({
     variables: {
       slug: props.lessonSlug,
@@ -28,11 +34,11 @@ export function Video(props: VideoProps) {
     );
   }
   return (
-    <div className='flex-1'>
+    <div className='flex-1 z-40'>
       <div className='bg-black flex justify-center'>
         <div className='h-full w-full max-w-[1100px] max-h-[60vh] aspect-video'>
           <Player>
-            <Youtube videoId={data.lesson.videoId} />
+            <Youtube videoId={data.lesson.videoId} key={data.lesson.videoId} />
             <DefaultUi />
           </Player>
         </div>

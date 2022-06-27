@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { DraggableVideo } from '../components/DraggableVideo';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
 import { Video } from '../components/Video';
@@ -8,6 +9,7 @@ export function Event() {
   return (
     <div className='flex flex-col min-h-screen'>
       <Header />
+      <DraggableVideo/>
       <main className='flex flex-1'>
         {slug
         ? <Video lessonSlug={slug}/>
