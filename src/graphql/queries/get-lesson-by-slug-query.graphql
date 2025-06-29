@@ -3,10 +3,14 @@
       title
       videoId
       description
+      challenge{
+        url
+      }
       teacher {
         name
         bio
         avatarURL
+        portfolio
       }
     }
   }
